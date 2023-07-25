@@ -1,0 +1,40 @@
+citadel_version: 4
+metadata:
+  name: Ghost
+  category: Development
+  icon: https://svgshare.com/i/vWV.svg
+  version: v5.22.9
+  description: Ghost is a powerful app for new-media creators to publish, share, and grow a business around their content. It comes with modern tools to build a website, publish content, send newsletters & offer paid subscriptions to members.Dont settle for another basic profile that looks just like everyone else. Make it yours.Launch your website with a selection of beautiful free themes and tweak the design settings to perfectly match your brand and style.Go even further with hundreds of custom themes in our marketplace, or build your own completely custom design from scratch.An editor built from the ground-up for professionals. Calm by design, with advanced workflows by default. No more suffering through clumsy toolbars or drag & oops. Immerse yourself in the story with an interface that's invisible until you need it, and powerful when you do.Ghost is an all-in-one platform for creators to run their own website, collect user signups, publish private content, collect payments, and send email newsletters.A powerful editing workflow.Whether you're sharing writing, photography, videos, podcasts, or something else - the Ghost editor makes it easy to compose and publish anything you like.Show off your own unique style.Choose from hundreds of free or premium themes for your own website, on your own domain name, with your own branding. Stand out from everyone else, so your audience remember you.
+  developer:
+    Team Ghost: https://ghost.org/
+  repo:
+    Public: https://github.com/tryghost/ghost/
+  support: https://ghost.org/docs/
+  gallery:
+    - https://user-images.githubusercontent.com/43396684/201184984-36445e85-978e-44d9-97c7-a9779fd2b6c4.png
+    - https://user-images.githubusercontent.com/43396684/201184974-da016455-814f-40df-a144-000380bc6062.png
+    - https://user-images.githubusercontent.com/43396684/201184958-fdc7fbbc-0fcb-4281-b7fa-9136a7494347.png
+    - https://user-images.githubusercontent.com/43396684/201184920-c42a6b9c-bcab-4a8a-bebc-eda643275829.png
+    - https://user-images.githubusercontent.com/43396684/201184937-440092f0-b2b4-4e76-89cb-bb11ebc64c69.png
+  defaultPassword: ""
+  torOnly: false
+  permissions:
+
+services:
+  main:
+    image: ghost:5.22.9@sha256:2317f68dfe9b206adbb1c7f332745d870c56f1de1d756b72bf6da205d43c37e0
+    restart: on-failure
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: ghost
+      database__connection__database: ghost
+      url: ${DEVICE_DOMAIN_NAME}
+    port: 2368
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ghost
